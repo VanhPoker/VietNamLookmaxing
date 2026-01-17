@@ -12,7 +12,9 @@ import {
     Ruler,
     RotateCcw,
     Share2,
-    Download
+    Download,
+    User,
+    UserCircle
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -21,15 +23,17 @@ import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Progress } from '@/components/ui/progress';
 import { FaceRadarChart } from './RadarChart';
+import { TooltipTerm, highlightTerms } from '@/components/shared/Tooltip';
 import { AnalysisResult, TIER_COLORS, MEASUREMENT_LABELS } from '@/types';
 import { cn } from '@/lib/utils';
 
 interface ResultCardProps {
     result: AnalysisResult;
+    images?: { front: string; side: string } | null;
     onAnalyzeAgain?: () => void;
 }
 
-export function ResultCard({ result, onAnalyzeAgain }: ResultCardProps) {
+export function ResultCard({ result, images, onAnalyzeAgain }: ResultCardProps) {
     const tierStyle = TIER_COLORS[result.tier] || TIER_COLORS['Normie'];
 
     return (
@@ -132,18 +136,35 @@ export function ResultCard({ result, onAnalyzeAgain }: ResultCardProps) {
                             >
                                 <div>
                                     <p className="text-2xl font-bold text-primary">{result.strengths.length}</p>
-                                    <p className="text-xs text-muted-foreground">Strengths</p>
+                                    <p className="text-xs text-muted-foreground">Điểm mạnh</p>
                                 </div>
                                 <div>
                                     <p className="text-2xl font-bold text-warning">{result.weaknesses.length}</p>
-                                    <p className="text-xs text-muted-foreground">To Improve</p>
+                                    <p className="text-xs text-muted-foreground">Cần cải thiện</p>
                                 </div>
                             </motion.div>
                         </div>
 
-                        {/* Right: Radar Chart */}
+                        {/* Right: Radar Chart + Images */}
                         <div className="p-8 flex flex-col items-center justify-center border-l border-border/50">
-                            <h3 className="text-sm font-medium text-muted-foreground mb-4">Feature Breakdown</h3>
+                            {/* User Images */}
+                            {images && (
+                                <div className="flex gap-2 mb-4">
+                                    <div className="relative w-16 h-16 rounded-lg overflow-hidden border border-border/50">
+                                        <img src={images.front} alt="Mặt trước" className="w-full h-full object-cover" />
+                                        <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-[8px] text-center py-0.5">
+                                            <User className="w-2 h-2 inline mr-0.5" />Trước
+                                        </div>
+                                    </div>
+                                    <div className="relative w-16 h-16 rounded-lg overflow-hidden border border-border/50">
+                                        <img src={images.side} alt="Mặt nghiêng" className="w-full h-full object-cover" />
+                                        <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-[8px] text-center py-0.5">
+                                            <UserCircle className="w-2 h-2 inline mr-0.5" />Nghiêng
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                            <h3 className="text-sm font-medium text-muted-foreground mb-4">Phân Tích Chi Tiết</h3>
                             <FaceRadarChart data={result.radar_data} size="md" />
                         </div>
                     </div>
@@ -153,21 +174,21 @@ export function ResultCard({ result, onAnalyzeAgain }: ResultCardProps) {
             {/* Detailed Analysis Tabs */}
             <Tabs defaultValue="analysis" className="w-full">
                 <TabsList className="grid w-full grid-cols-4 bg-muted/50">
-                    <TabsTrigger value="analysis" className="gap-2">
+                    <TabsTrigger value="analysis" className="gap-2 text-xs md:text-sm">
                         <Target className="w-4 h-4" />
-                        Analysis
+                        <span className="hidden md:inline">Phân Tích</span>
                     </TabsTrigger>
-                    <TabsTrigger value="strengths" className="gap-2">
+                    <TabsTrigger value="strengths" className="gap-2 text-xs md:text-sm">
                         <Check className="w-4 h-4" />
-                        Strengths
+                        <span className="hidden md:inline">Điểm Mạnh</span>
                     </TabsTrigger>
-                    <TabsTrigger value="improvements" className="gap-2">
+                    <TabsTrigger value="improvements" className="gap-2 text-xs md:text-sm">
                         <TrendingUp className="w-4 h-4" />
-                        Improve
+                        <span className="hidden md:inline">Cải Thiện</span>
                     </TabsTrigger>
-                    <TabsTrigger value="measurements" className="gap-2">
+                    <TabsTrigger value="measurements" className="gap-2 text-xs md:text-sm">
                         <Ruler className="w-4 h-4" />
-                        Metrics
+                        <span className="hidden md:inline">Số Đo</span>
                     </TabsTrigger>
                 </TabsList>
 
@@ -176,7 +197,7 @@ export function ResultCard({ result, onAnalyzeAgain }: ResultCardProps) {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Target className="w-5 h-5 text-primary" />
-                                Expert Analysis
+                                Phân Tích Chuyên Gia
                             </CardTitle>
                         </CardHeader>
                         <CardContent>
@@ -187,7 +208,7 @@ export function ResultCard({ result, onAnalyzeAgain }: ResultCardProps) {
                             <div className="space-y-3">
                                 <h4 className="font-medium flex items-center gap-2">
                                     <Lightbulb className="w-4 h-4 text-warning" />
-                                    Recommendations
+                                    Lời Khuyên
                                 </h4>
                                 <p className="text-muted-foreground text-sm leading-relaxed">{result.advice}</p>
                             </div>
@@ -200,7 +221,7 @@ export function ResultCard({ result, onAnalyzeAgain }: ResultCardProps) {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Check className="w-5 h-5 text-success" />
-                                Your Strengths
+                                Điểm Mạnh Của Bạn
                             </CardTitle>
                         </CardHeader>
                         <CardContent>
@@ -227,7 +248,7 @@ export function ResultCard({ result, onAnalyzeAgain }: ResultCardProps) {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <AlertTriangle className="w-5 h-5 text-warning" />
-                                Areas for Improvement
+                                Cần Cải Thiện
                             </CardTitle>
                         </CardHeader>
                         <CardContent>
@@ -254,7 +275,7 @@ export function ResultCard({ result, onAnalyzeAgain }: ResultCardProps) {
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
                                 <Ruler className="w-5 h-5 text-primary" />
-                                Detailed Measurements
+                                Số Đo Chi Tiết
                             </CardTitle>
                         </CardHeader>
                         <CardContent>
@@ -319,19 +340,19 @@ export function ResultCard({ result, onAnalyzeAgain }: ResultCardProps) {
             </Tabs>
 
             {/* Action buttons */}
-            <div className="flex gap-4 justify-center">
+            <div className="flex flex-wrap gap-3 justify-center">
                 <Button variant="outline" size="lg" className="gap-2">
                     <Share2 className="w-4 h-4" />
-                    Share Result
+                    Chia Sẻ
                 </Button>
                 <Button variant="outline" size="lg" className="gap-2">
                     <Download className="w-4 h-4" />
-                    Download Report
+                    Tải Xuống
                 </Button>
                 {onAnalyzeAgain && (
                     <Button size="lg" onClick={onAnalyzeAgain} className="gap-2">
                         <RotateCcw className="w-4 h-4" />
-                        Analyze Again
+                        Chấm Điểm Lại
                     </Button>
                 )}
             </div>

@@ -26,6 +26,7 @@ type AppState = 'home' | 'capture' | 'capture-compare' | 'analyzing' | 'comparin
 export default function HomePage() {
   const [appState, setAppState] = useState<AppState>('home');
   const [compareData, setCompareData] = useState<CompareResponse | null>(null);
+  const [capturedImages, setCapturedImages] = useState<{ front: string; side: string } | null>(null);
   const { isLoading, error, result, analyze, reset, useMockData } = useAnalysis();
 
   const handleStartAnalysis = () => {
@@ -37,6 +38,7 @@ export default function HomePage() {
   };
 
   const handleCapture = async (frontImage: string, sideImage: string) => {
+    setCapturedImages({ front: frontImage, side: sideImage });
     setAppState('analyzing');
 
     try {
@@ -81,6 +83,7 @@ export default function HomePage() {
   const handleReset = () => {
     reset();
     setCompareData(null);
+    setCapturedImages(null);
     setAppState('home');
   };
 
@@ -254,9 +257,9 @@ export default function HomePage() {
                     <span
                       key={tier}
                       className={`px-2 py-1 rounded-full ${i < 2 ? 'bg-red-500/20 text-red-400' :
-                          i < 4 ? 'bg-yellow-500/20 text-yellow-400' :
-                            i < 6 ? 'bg-green-500/20 text-green-400' :
-                              'bg-cyan-500/20 text-cyan-400'
+                        i < 4 ? 'bg-yellow-500/20 text-yellow-400' :
+                          i < 6 ? 'bg-green-500/20 text-green-400' :
+                            'bg-cyan-500/20 text-cyan-400'
                         }`}
                     >
                       {tier}
@@ -337,7 +340,7 @@ export default function HomePage() {
                   Dựa trên số liệu khoa học và phân tích AI
                 </p>
               </div>
-              <ResultCard result={result} onAnalyzeAgain={handleReset} />
+              <ResultCard result={result} images={capturedImages} onAnalyzeAgain={handleReset} />
             </motion.div>
           )}
 
