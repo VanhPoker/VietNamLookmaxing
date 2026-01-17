@@ -1,0 +1,24 @@
+# FastAPI & Server
+fastapi
+uvicorn[standard]
+python-multipart
+
+# AI/Computer Vision
+mediapipe
+opencv-python
+numpy
+Pillow
+
+# LLM Integration (lightweight - no langchain)
+anthropic
+google-generativeai
+
+# Utilities
+pydantic
+pydantic-settings
+python-dotenv
+
+# Testing
+pytest
+pytest-asyncio
+httpx
