@@ -161,18 +161,9 @@ export default function HomePage() {
                   Bắt Đầu Chấm Điểm
                   <ChevronRight className="w-5 h-5" />
                 </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  onClick={handleStartCompare}
-                  className="gap-2 text-base md:text-lg px-6 md:px-8 py-5 md:py-6 rounded-2xl"
-                >
-                  <GitCompare className="w-5 h-5" />
-                  So Sánh 4 Models
-                </Button>
               </motion.div>
 
-              {/* Demo Buttons */}
+              {/* Demo Button */}
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -188,15 +179,6 @@ export default function HomePage() {
                   <Play className="w-4 h-4" />
                   Xem Demo
                 </Button>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handleDemoCompare}
-                  className="gap-2"
-                >
-                  <GitCompare className="w-4 h-4" />
-                  Demo So Sánh
-                </Button>
               </motion.div>
 
               {/* Features */}
@@ -204,28 +186,18 @@ export default function HomePage() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5 }}
-                className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 w-full max-w-4xl"
+                className="grid grid-cols-2 gap-4 w-full max-w-md"
               >
                 {[
                   {
                     icon: Target,
                     title: '468 Điểm Mặt',
-                    description: 'Mapping chính xác',
-                  },
-                  {
-                    icon: Brain,
-                    title: '4 AI Models',
-                    description: 'So sánh Gemini',
+                    description: 'Mapping chính xác khuôn mặt',
                   },
                   {
                     icon: Zap,
                     title: 'Kết Quả Nhanh',
-                    description: 'Phân tích tức thì',
-                  },
-                  {
-                    icon: GitCompare,
-                    title: 'So Sánh',
-                    description: 'Nhiều góc nhìn',
+                    description: 'Phân tích tức thì bằng AI',
                   },
                 ].map((feature, i) => (
                   <motion.div
@@ -233,13 +205,13 @@ export default function HomePage() {
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.6 + i * 0.1 }}
-                    className="p-3 md:p-4 rounded-xl glass-card hover:border-primary/30 transition-colors cursor-pointer group"
+                    className="p-4 rounded-xl glass-card hover:border-primary/30 transition-colors cursor-pointer group"
                   >
-                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-2 md:mb-3 group-hover:bg-primary/20 transition-colors">
-                      <feature.icon className="w-4 h-4 md:w-5 md:h-5 text-primary" />
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-3 group-hover:bg-primary/20 transition-colors">
+                      <feature.icon className="w-5 h-5 text-primary" />
                     </div>
-                    <h3 className="font-semibold text-foreground text-xs md:text-sm mb-1">{feature.title}</h3>
-                    <p className="text-[10px] md:text-xs text-muted-foreground">{feature.description}</p>
+                    <h3 className="font-semibold text-foreground text-sm mb-1">{feature.title}</h3>
+                    <p className="text-xs text-muted-foreground">{feature.description}</p>
                   </motion.div>
                 ))}
               </motion.div>

@@ -42,7 +42,7 @@ export function Header() {
                         </div>
                         <div>
                             <span className="text-base md:text-lg font-bold text-foreground tracking-tight">
-                                Máy Đo <span className="text-gradient">Lookmaxing</span>
+                                Vietnam <span className="text-gradient">Lookmaxing</span>
                             </span>
                             <p className="text-[10px] md:text-xs text-muted-foreground -mt-0.5">
                                 AI Chấm Điểm Nhan Sắc
@@ -142,7 +142,7 @@ export function Footer() {
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Dna className="w-4 h-4" />
-                        <span>Máy Đo Lookmaxing © 2026</span>
+                        <span>Vietnam Lookmaxing © 2026</span>
                     </div>
                     <p className="text-xs text-muted-foreground text-center md:text-right max-w-md">
                         Chỉ dành cho mục đích tham khảo. Phân tích AI không phải lời khuyên y tế.
