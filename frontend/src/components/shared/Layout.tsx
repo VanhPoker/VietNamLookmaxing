@@ -42,10 +42,10 @@ export function Header() {
                         </div>
                         <div>
                             <span className="text-base md:text-lg font-bold text-foreground tracking-tight">
-                                Việt <span className="text-gradient">Lookmaxing</span>
+                                Máy Đo <span className="text-gradient">Lookmaxing</span>
                             </span>
                             <p className="text-[10px] md:text-xs text-muted-foreground -mt-0.5">
-                                Đo Điểm Nhan Sắc AI
+                                AI Chấm Điểm Nhan Sắc
                             </p>
                         </div>
                     </Link>
@@ -57,8 +57,8 @@ export function Header() {
                                 key={item.name}
                                 href={item.comingSoon ? '#' : item.href}
                                 className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-colors flex items-center gap-2 ${item.active
-                                        ? 'text-primary bg-primary/10'
-                                        : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                                    ? 'text-primary bg-primary/10'
+                                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                                     } ${item.comingSoon ? 'cursor-not-allowed opacity-60' : ''}`}
                                 onClick={(e) => item.comingSoon && e.preventDefault()}
                             >
@@ -110,8 +110,8 @@ export function Header() {
                                     key={item.name}
                                     href={item.comingSoon ? '#' : item.href}
                                     className={`relative px-4 py-3 rounded-xl text-sm font-medium transition-colors flex items-center gap-3 ${item.active
-                                            ? 'text-primary bg-primary/10'
-                                            : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                                        ? 'text-primary bg-primary/10'
+                                        : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                                         } ${item.comingSoon ? 'opacity-60' : ''}`}
                                     onClick={(e) => {
                                         if (item.comingSoon) e.preventDefault();
@@ -142,7 +142,7 @@ export function Footer() {
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Dna className="w-4 h-4" />
-                        <span>Việt Lookmaxing © 2026</span>
+                        <span>Máy Đo Lookmaxing © 2026</span>
                     </div>
                     <p className="text-xs text-muted-foreground text-center md:text-right max-w-md">
                         Chỉ dành cho mục đích tham khảo. Phân tích AI không phải lời khuyên y tế.
