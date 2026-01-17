@@ -5,7 +5,7 @@ python-multipart
 
 # AI/Computer Vision
 mediapipe
-opencv-python
+opencv-python-headless
 numpy
 Pillow
 
