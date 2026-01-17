@@ -1,5 +1,4 @@
 # Nixpacks configuration for Railway
-# Fixes OpenCV/MediaPipe dependencies
 
 [phases.setup]
 nixPkgs = ["python311", "libGL", "libGLU", "xorg.libX11", "xorg.libXext", "xorg.libXrender", "xorg.libSM", "xorg.libICE", "mesa"]
@@ -8,4 +7,4 @@ nixPkgs = ["python311", "libGL", "libGLU", "xorg.libX11", "xorg.libXext", "xorg.
 cmds = ["pip install --upgrade pip", "pip install -r requirements.txt"]
 
 [start]
-cmd = "python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+cmd = "python start.py"
