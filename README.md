@@ -4,33 +4,33 @@
 
 ![Project Adam](https://img.shields.io/badge/Project-Adam-blueviolet?style=for-the-badge)
 ![Python](https://img.shields.io/badge/Python-3.11+-blue?style=for-the-badge&logo=python)
-![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)
+![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.109-009688?style=for-the-badge&logo=fastapi)
 
 **AI-powered facial aesthetics analysis using MediaPipe and advanced LLMs**
 
-[Features](#-features) • [Tech Stack](#-tech-stack) • [Quick Start](#-quick-start) • [API](#-api-documentation) • [Contributing](#-contributing)
+[Tính năng](#-tính-năng) • [Tech Stack](#-tech-stack) • [Cài đặt](#-cài-đặt-local) • [API](#-api-documentation) • [Đóng góp](#-đóng-góp)
 
 </div>
 
 ---
 
-## ✨ Features
+## ✨ Tính năng
 
-- 📸 **Dual Image Analysis** - Analyze both front-facing and side profile images
-- 🔬 **468 Landmark Detection** - Precise facial mapping using Google MediaPipe
-- 📐 **Scientific Measurements** - Calculate canthal tilt, gonial angle, midface ratio, and more
-- 🤖 **AI-Powered Analysis** - Claude/Gemini provides detailed aesthetic assessments
-- 📊 **Visual Results** - Radar charts and score breakdowns
-- 🎯 **PSL Classification** - Tier system from "Sub 3" to "Adam"
+- 📸 **Phân tích 2 góc chụp** - Phân tích cả ảnh chính diện và góc nghiêng
+- 🔬 **468 điểm landmark** - Nhận diện chính xác khuôn mặt bằng Google MediaPipe
+- 📐 **Đo lường khoa học** - Tính toán canthal tilt, gonial angle, midface ratio, và nhiều hơn nữa
+- 🤖 **Phân tích bằng AI** - Claude/Gemini cung cấp đánh giá thẩm mỹ chi tiết
+- 📊 **Kết quả trực quan** - Biểu đồ radar và phân tích điểm số
+- 🎯 **Phân loại PSL** - Hệ thống tier từ "Sub 3" đến "Adam"
 
 ---
 
 ## 🛠 Tech Stack
 
 ### Frontend
-- **Framework**: Next.js 14 with App Router
-- **Styling**: Tailwind CSS + Shadcn/UI
+- **Framework**: Next.js 16 với App Router
+- **Styling**: Tailwind CSS 4 + Shadcn/UI
 - **Camera**: React Webcam
 - **Charts**: Recharts
 - **Animations**: Framer Motion
@@ -39,66 +39,215 @@
 - **Framework**: FastAPI (Python 3.11+)
 - **Computer Vision**: MediaPipe Face Mesh
 - **Math**: NumPy, OpenCV
-- **LLM**: LangChain + Anthropic/Google SDKs
+- **LLM**: Anthropic Claude / Google Gemini
 
 ### Infrastructure
-- **Backend Hosting**: Google Cloud Run
+- **Backend Hosting**: Google Cloud Run / Railway
 - **Frontend Hosting**: Vercel
 - **Containerization**: Docker
 
 ---
 
-## 🚀 Quick Start
+## � Cấu trúc thư mục
 
-### Prerequisites
-- Python 3.11+
-- Node.js 18+
-- Docker (optional)
+```
+VietNamLookmaxing/
+├── backend/                 # FastAPI Backend
+│   ├── app/
+│   │   ├── api/            # API routes
+│   │   ├── core/           # Config, constants
+│   │   ├── models/         # Pydantic models
+│   │   └── services/       # Business logic
+│   ├── tests/              # Unit tests
+│   ├── .env.example        # Environment template
+│   ├── requirements.txt    # Python dependencies
+│   └── Dockerfile
+│
+├── frontend/               # Next.js Frontend
+│   ├── src/
+│   │   ├── app/           # App Router pages
+│   │   ├── components/    # React components
+│   │   └── lib/           # Utilities
+│   ├── public/            # Static assets
+│   ├── .env.example       # Environment template
+│   └── package.json
+│
+├── docs/                   # Documentation
+├── docker-compose.yml      # Docker orchestration
+└── README.md
+```
 
-### Backend Setup
+---
+
+## 🚀 Cài đặt Local
+
+### 📋 Yêu cầu hệ thống
+
+| Công cụ | Phiên bản | Kiểm tra | Link tải |
+|---------|-----------|----------|----------|
+| **Python** | 3.11+ | `python --version` | [python.org](https://python.org) |
+| **Node.js** | 18+ | `node --version` | [nodejs.org](https://nodejs.org) |
+| **Git** | Any | `git --version` | [git-scm.com](https://git-scm.com) |
+| **Docker** *(optional)* | Latest | `docker --version` | [docker.com](https://docker.com) |
+
+### 🔑 API Keys (Bắt buộc)
+
+Bạn cần **ít nhất 1** trong 2 API key sau:
+
+| Provider | Link lấy key | Ghi chú |
+|----------|-------------|---------|
+| **Google AI (Gemini)** | [aistudio.google.com/apikey](https://aistudio.google.com/apikey) | ✅ Khuyến nghị - Free tier có sẵn |
+| **Anthropic (Claude)** | [console.anthropic.com](https://console.anthropic.com/) | Chất lượng cao hơn, tốn phí |
+
+---
+
+### 🔧 Cách 1: Cài đặt thủ công
+
+#### Bước 1: Clone repository
 
 ```bash
-# Navigate to backend
+git clone https://github.com/your-username/VietNamLookmaxing.git
+cd VietNamLookmaxing
+```
+
+#### Bước 2: Cài đặt Backend
+
+```powershell
+# Di chuyển vào thư mục backend
 cd backend
 
-# Create virtual environment
+# Tạo virtual environment
 python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
 
-# Install dependencies
+# Kích hoạt virtual environment
+# Windows (PowerShell):
+.\venv\Scripts\Activate.ps1
+
+# Windows (CMD):
+venv\Scripts\activate.bat
+
+# Linux/macOS:
+source venv/bin/activate
+
+# Cài đặt dependencies
 pip install -r requirements.txt
 
-# Copy environment file
+# Copy file environment
+copy .env.example .env
+# Hoặc trên Linux/macOS:
 cp .env.example .env
-# Edit .env with your API keys
-
-# Run server
-uvicorn app.main:app --reload
 ```
 
-### Frontend Setup
+#### Bước 3: Cấu hình Backend Environment
+
+Mở file `backend/.env` và điền API key của bạn:
+
+```env
+# REQUIRED: Điền ít nhất 1 API key
+GOOGLE_API_KEY=your_google_api_key_here
+ANTHROPIC_API_KEY=your_anthropic_api_key_here
+
+# Chọn provider: "gemini" hoặc "claude"
+LLM_PROVIDER=gemini
+
+# Model Gemini (khuyến nghị gemini-1.5-pro)
+GEMINI_MODEL=gemini-1.5-pro
+```
+
+#### Bước 4: Chạy Backend
 
 ```bash
-# Navigate to frontend
+# Đảm bảo đang ở thư mục backend và venv đã được kích hoạt
+uvicorn app.main:app --reload
+
+# Backend sẽ chạy tại: http://localhost:8000
+# API Docs: http://localhost:8000/docs
+```
+
+#### Bước 5: Cài đặt Frontend (Terminal mới)
+
+Mở **terminal mới** và chạy:
+
+```bash
+# Di chuyển vào thư mục frontend
 cd frontend
 
-# Install dependencies
+# Cài đặt dependencies
 npm install
 
-# Run development server
-npm run dev
+# Copy file environment
+copy .env.example .env.local
+# Hoặc trên Linux/macOS:
+cp .env.example .env.local
 ```
 
-### Using Docker
+#### Bước 6: Cấu hình Frontend Environment
+
+File `frontend/.env.local` mặc định đã được cấu hình cho local development:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8000
+```
+
+#### Bước 7: Chạy Frontend
 
 ```bash
-# Build and run all services
+# Chạy development server
+npm run dev
+
+# Frontend sẽ chạy tại: http://localhost:3000
+```
+
+#### ✅ Xác nhận cài đặt thành công
+
+1. Mở browser tại: **http://localhost:3000**
+2. Backend health check: **http://localhost:8000/api/v1/health**
+3. API Docs: **http://localhost:8000/docs**
+
+---
+
+### 🐳 Cách 2: Sử dụng Docker (Đơn giản hơn)
+
+```bash
+# Clone repository
+git clone https://github.com/your-username/VietNamLookmaxing.git
+cd VietNamLookmaxing
+
+# Tạo file .env ở thư mục gốc với API keys
+echo "GOOGLE_API_KEY=your_key_here" > .env
+echo "LLM_PROVIDER=gemini" >> .env
+
+# Build và chạy tất cả services
 docker-compose up --build
+
+# Truy cập:
+# - Frontend: http://localhost:3000
+# - Backend: http://localhost:8000
+```
+
+Để dừng containers:
+
+```bash
+docker-compose down
 ```
 
 ---
 
 ## 📚 API Documentation
+
+### Health Check
+
+```http
+GET /api/v1/health
+```
+
+**Response:**
+```json
+{
+  "status": "healthy",
+  "provider": "gemini"
+}
+```
 
 ### Analyze Endpoint
 
@@ -119,10 +268,10 @@ Content-Type: application/json
   "data": {
     "score": 7.5,
     "tier": "Chadlite",
-    "analysis": "Detailed facial analysis...",
-    "strengths": ["Positive canthal tilt", "Strong jawline"],
-    "weaknesses": ["Slightly long midface"],
-    "advice": "Recommendations...",
+    "analysis": "Phân tích chi tiết khuôn mặt...",
+    "strengths": ["Positive canthal tilt", "Góc hàm mạnh"],
+    "weaknesses": ["Midface hơi dài"],
+    "advice": "Các khuyến nghị...",
     "radar_data": {
       "eyes": 8.5,
       "jaw": 7.5,
@@ -135,43 +284,99 @@ Content-Type: application/json
 }
 ```
 
-For full API documentation, run the backend and visit: `http://localhost:8000/docs`
+Xem full API docs tại: `http://localhost:8000/docs`
 
 ---
 
-## 📊 Measurement Reference
+## 📊 Bảng tham chiếu chỉ số
 
-| Metric | Ideal Range | Description |
-|--------|-------------|-------------|
-| Canthal Tilt | +4° to +8° | Eye corner angle (hunter eyes) |
-| Bigonial/Bizygomatic | 75-80% | Jaw to cheekbone ratio |
-| Gonial Angle | 125-130° | Jaw angle strength |
-| Midface Ratio | 43-44% | Golden ratio zone |
-| Nasofrontal Angle | 130-135° | Forehead-nose profile |
+| Chỉ số | Phạm vi lý tưởng | Mô tả |
+|--------|------------------|-------|
+| Canthal Tilt | +4° đến +8° | Góc đuôi mắt (hunter eyes) |
+| Bigonial/Bizygomatic | 75-80% | Tỷ lệ hàm/gò má |
+| Gonial Angle | 125-130° | Độ mạnh của góc hàm |
+| Midface Ratio | 43-44% | Vùng tỷ lệ vàng |
+| Nasofrontal Angle | 130-135° | Góc trán-mũi nhìn nghiêng |
 
 ---
 
-## 🤝 Contributing
+## ❓ Troubleshooting
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+### Lỗi thường gặp
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+<details>
+<summary><b>❌ ModuleNotFoundError: No module named 'xxx'</b></summary>
+
+Đảm bảo bạn đã kích hoạt virtual environment:
+
+```powershell
+# Windows PowerShell
+.\venv\Scripts\Activate.ps1
+
+# Sau đó cài lại dependencies
+pip install -r requirements.txt
+```
+</details>
+
+<details>
+<summary><b>❌ CORS Error khi gọi API từ Frontend</b></summary>
+
+Kiểm tra file `backend/.env`:
+```env
+FRONTEND_URL=http://localhost:3000
+```
+
+Và đảm bảo frontend đang chạy đúng port 3000.
+</details>
+
+<details>
+<summary><b>❌ API Key Invalid / Rate Limit</b></summary>
+
+- Kiểm tra API key trong `backend/.env` đã đúng chưa
+- Google AI: Xác nhận key tại [aistudio.google.com](https://aistudio.google.com)
+- Nếu bị rate limit, chờ vài phút hoặc đổi sang provider khác
+</details>
+
+<details>
+<summary><b>❌ Camera không hoạt động</b></summary>
+
+- Đảm bảo truy cập qua `localhost` (không phải IP)
+- Cho phép browser access camera
+- Thử với Chrome hoặc Edge (Firefox có thể có vấn đề)
+</details>
+
+<details>
+<summary><b>❌ Lỗi "execution of scripts is disabled" trên PowerShell</b></summary>
+
+Chạy PowerShell với quyền Admin và thực hiện:
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+</details>
+
+---
+
+## 🤝 Đóng góp
+
+Chúng tôi hoan nghênh mọi đóng góp! Vui lòng tham khảo các bước sau:
+
+1. Fork repository
+2. Tạo feature branch (`git checkout -b feature/TinhNangMoi`)
+3. Commit changes (`git commit -m 'Thêm tính năng mới'`)
+4. Push to branch (`git push origin feature/TinhNangMoi`)
+5. Mở Pull Request
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Project này được phát hành dưới giấy phép MIT - xem file [LICENSE](LICENSE) để biết thêm chi tiết.
 
 ---
 
-## ⚠️ Disclaimer
+## ⚠️ Lưu ý
 
-This tool is for educational and entertainment purposes only. Facial aesthetics are subjective and vary across cultures. The scores and analyses provided should not be taken as medical advice or absolute truth.
+> Công cụ này chỉ dành cho mục đích giải trí và giáo dục. Tiêu chuẩn thẩm mỹ khuôn mặt mang tính chủ quan và khác biệt giữa các nền văn hóa. Điểm số và phân tích được cung cấp không nên được coi là lời khuyên y tế hoặc sự thật tuyệt đối.
 
 ---
 
